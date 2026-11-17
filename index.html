@@ -545,7 +545,7 @@ function setLang(l){
   try{localStorage.setItem('lang',l)}catch(e){}
 }
 document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
-try{const s=localStorage.getItem('lang'); if(s&&s!=='fr') setLang(s)}catch(e){}
+try{const q=new URLSearchParams(location.search).get('lang')||(location.hash==='#en'?'en':location.hash==='#fr'?'fr':null);const s=q||localStorage.getItem('lang'); if(s&&s!=='fr'&&i18n[s]) setLang(s); else if(q==='fr') setLang('fr')}catch(e){}
 
 // ---- Titre rotatif (effet machine à écrire) ----
 const ROLES={fr:["Admin Systèmes & Réseaux.","Développeur Web.","Créateur d'applications."],en:["Systems & Network Admin.","Web Developer.","App Builder."]};
